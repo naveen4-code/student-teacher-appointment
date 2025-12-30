@@ -1,4 +1,3 @@
-// js/env.js
 export const ENV = {
   FIREBASE_API_KEY: "AIzaSyCow7Qd_dH_vLEpyyn1S2W9blh_-w7SgOE",
   FIREBASE_AUTH_DOMAIN: "student-teacher-appointm-8a95e.firebaseapp.com",

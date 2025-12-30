@@ -8,7 +8,6 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* ---------- ADD TEACHER ---------- */
 window.addTeacher = async function () {
   const name = document.getElementById("tname").value;
   const dept = document.getElementById("dept").value;
@@ -19,7 +18,6 @@ window.addTeacher = async function () {
     alert("All fields required");
     return;
   }
-
   const res = await createUserWithEmailAndPassword(auth, email, pass);
 
   await setDoc(doc(db, "users", res.user.uid), {

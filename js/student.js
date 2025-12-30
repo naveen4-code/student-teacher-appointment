@@ -1,7 +1,6 @@
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
 import {
   doc,
   getDoc,
@@ -9,34 +8,25 @@ import {
   collection,
   addDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-/* ================= AUTH CHECK ================= */
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     location.href = "index.html";
     return;
   }
-
   const uid = user.uid;
-
-  /* ---------- STUDENT INFO ---------- */
   const snap = await getDoc(doc(db, "users", uid));
   if (!snap.exists()) {
     alert("Student record not found");
     return;
   }
-
   const s = snap.data();
   document.getElementById("studentInfo").innerHTML = `
     <h2>Welcome, ${s.name}</h2>
     <p>Roll No: ${s.rollNo}</p>
     <p>Class: ${s.class} - ${s.section}</p>
   `;
-
-  /* ---------- TEACHERS LIST ---------- */
   const list = document.getElementById("teacherList");
   list.innerHTML = "";
-
   const teachers = await getDocs(collection(db, "users"));
   teachers.forEach(d => {
     const t = d.data();
@@ -48,8 +38,6 @@ onAuthStateChanged(auth, async (user) => {
         </div>`;
     }
   });
-
-  /* ---------- BOOK FUNCTION ---------- */
   window.book = async function (teacherId) {
     await addDoc(collection(db, "appointments"), {
       studentId: uid,
