@@ -32,8 +32,6 @@ window.addTeacher = async function () {
   alert("Teacher added");
   loadTeachers();
 };
-
-/* ---------- LOAD TEACHERS ---------- */
 async function loadTeachers() {
   const table = document.getElementById("teacherTable");
   table.innerHTML = "";
@@ -52,5 +50,4 @@ async function loadTeachers() {
     }
   });
 }
-
 loadTeachers();

@@ -76,3 +76,31 @@ body {
   margin-top: 10px;
   border-radius: 10px;
 }
+.container-row {
+  display: flex;
+  gap: 60px;          
+  padding: 50px;
+  justify-content: center;
+  align-items: flex-start;
+}
+.card.wide {
+  width: 520px;
+}
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.modern-table th {
+  text-align: left;
+  padding: 12px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 8px;
+}
+.modern-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.modern-table tr:hover {
+  background: rgba(255,255,255,0.1);
+}

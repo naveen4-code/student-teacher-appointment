@@ -5,31 +5,29 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<div class="card">
-  <h2>Add Teacher</h2>
-
-  <input id="tname" placeholder="Teacher Name">
-  <input id="dept" placeholder="Department">
-  <input id="temail" placeholder="Email">
-  <input id="tpass" placeholder="Temp Password">
-  <button onclick="addTeacher()">Add Teacher</button>
+  <div class="container-row">
+    <div class="card">
+      <h2>Add Teacher</h2>
+      <input id="tname" placeholder="Teacher Name" />
+      <input id="dept" placeholder="Department" />
+      <input id="email" placeholder="Email" />
+      <input id="password" placeholder="Temp Password" />
+      <button onclick="addTeacher()">Add Teacher</button>
+    </div>
+    <div class="card wide">
+      <h2>Teachers List</h2>
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody id="teacherTable"></tbody>
+      </table>
+    </div>
 </div>
-
-<div class="card">
-  <h2>Teachers List</h2>
-  <table border="1" width="100%">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody id="teacherTable"></tbody>
-  </table>
-</div>
-
-<script type="module" src="js/admin.js"></script>
+  <script type="module" src="js/admin.js"></script>
 </body>
 </html>
