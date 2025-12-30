@@ -48,3 +48,36 @@ a {
   margin-bottom: 8px;
   border-radius: 8px;
 }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* NEW */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px;
+  align-items: center;
+}
+
+.card {
+  width: 420px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 25px;
+  color: #fff;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* LIST ITEMS */
+.list-item {
+  background: rgba(255,255,255,0.2);
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
