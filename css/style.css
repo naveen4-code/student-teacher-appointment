@@ -10,7 +10,7 @@ body {
   align-items: center;
 }
 .card {
-  width: 380px;
+  width: px;
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(12px);
   border-radius: 16px;
