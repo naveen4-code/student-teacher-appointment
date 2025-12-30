@@ -1,16 +1,20 @@
 import { db } from "./firebase.js";
-import { logAction } from "./logger.js";
-import { collection, getDocs, addDoc } from 
+import { collection, getDocs, addDoc } from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const list = document.getElementById("list");
 const snap = await getDocs(collection(db, "teachers"));
+
 snap.forEach(d => {
-  list.innerHTML += `<li>${d.data().name}
-    <button onclick="book('${d.id}')">Book</button></li>`;
+  list.innerHTML += `
+    <div>${d.data().name}
+    <button onclick="book('${d.id}')">Book</button></div>`;
 });
-window.book = async (tid) => {
+
+window.book = async (id) => {
   await addDoc(collection(db, "appointments"), {
-    teacherId: tid,
+    teacherId: id,
     status: "Pending"
   });
-  logAction("student", "student", "Booked appointment");
+  alert("Appointment requested");
 };
