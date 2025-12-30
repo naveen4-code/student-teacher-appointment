@@ -1,50 +1,56 @@
 import { auth, db } from "./firebase.js";
-import {
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { createUserWithEmailAndPassword } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import {
   setDoc,
-  doc
+  doc,
+  collection,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+/* ---------- ADD TEACHER ---------- */
 window.addTeacher = async function () {
-  const nameInput = document.getElementById("tname");
-  const deptInput = document.getElementById("dept");
-  const emailInput = document.getElementById("temail");
-  const passInput = document.getElementById("tpass");
+  const name = document.getElementById("tname").value;
+  const dept = document.getElementById("dept").value;
+  const email = document.getElementById("temail").value;
+  const pass = document.getElementById("tpass").value;
 
-  if (!nameInput || !deptInput || !emailInput || !passInput) {
-    alert("Admin form fields missing");
+  if (!name || !dept || !email || !pass) {
+    alert("All fields required");
     return;
   }
 
-  const name = nameInput.value;
-  const dept = deptInput.value;
-  const email = emailInput.value;
-  const password = passInput.value;
+  const res = await createUserWithEmailAndPassword(auth, email, pass);
 
-  if (!name || !dept || !email || !password) {
-    alert("All fields are required");
-    return;
-  }
+  await setDoc(doc(db, "users", res.user.uid), {
+    role: "teacher",
+    name,
+    department: dept,
+    email
+  });
 
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-
-    await setDoc(doc(db, "users", res.user.uid), {
-      role: "teacher",
-      name,
-      department: dept,
-      email
-    });
-
-    alert("Teacher account created successfully");
-
-    nameInput.value = "";
-    deptInput.value = "";
-    emailInput.value = "";
-    passInput.value = "";
-  } catch (err) {
-    alert(err.message);
-  }
+  alert("Teacher added");
+  loadTeachers();
 };
+
+/* ---------- LOAD TEACHERS ---------- */
+async function loadTeachers() {
+  const table = document.getElementById("teacherTable");
+  table.innerHTML = "";
+
+  const snap = await getDocs(collection(db, "users"));
+
+  snap.forEach(docu => {
+    const d = docu.data();
+    if (d.role === "teacher") {
+      table.innerHTML += `
+        <tr>
+          <td>${d.name}</td>
+          <td>${d.department}</td>
+          <td>${d.email}</td>
+        </tr>`;
+    }
+  });
+}
+
+loadTeachers();

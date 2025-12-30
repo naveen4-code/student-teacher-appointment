@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin</title>
+  <title>Admin Dashboard</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <div class="card">
   <h2>Add Teacher</h2>
-<input id="tname" placeholder="Teacher Name">
-<input id="dept" placeholder="Department">
-<input id="temail" placeholder="Email">
-<input id="tpass" placeholder="Temp Password">
-<button onclick="addTeacher()">Add Teacher</button>
 
+  <input id="tname" placeholder="Teacher Name">
+  <input id="dept" placeholder="Department">
+  <input id="temail" placeholder="Email">
+  <input id="tpass" placeholder="Temp Password">
+  <button onclick="addTeacher()">Add Teacher</button>
+</div>
+
+<div class="card">
+  <h2>Teachers List</h2>
+  <table border="1" width="100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="teacherTable"></tbody>
+  </table>
 </div>
 
 <script type="module" src="js/admin.js"></script>

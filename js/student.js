@@ -1,20 +1,62 @@
-import { db } from "./firebase.js";
-import { collection, getDocs, addDoc } from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const list = document.getElementById("list");
-const snap = await getDocs(collection(db, "teachers"));
+import {
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-snap.forEach(d => {
-  list.innerHTML += `
-    <div>${d.data().name}
-    <button onclick="book('${d.id}')">Book</button></div>`;
-});
+/* ================= AUTH CHECK ================= */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    location.href = "index.html";
+    return;
+  }
 
-window.book = async (id) => {
-  await addDoc(collection(db, "appointments"), {
-    teacherId: id,
-    status: "Pending"
+  const uid = user.uid;
+
+  /* ---------- STUDENT INFO ---------- */
+  const snap = await getDoc(doc(db, "users", uid));
+  if (!snap.exists()) {
+    alert("Student record not found");
+    return;
+  }
+
+  const s = snap.data();
+  document.getElementById("studentInfo").innerHTML = `
+    <h2>Welcome, ${s.name}</h2>
+    <p>Roll No: ${s.rollNo}</p>
+    <p>Class: ${s.class} - ${s.section}</p>
+  `;
+
+  /* ---------- TEACHERS LIST ---------- */
+  const list = document.getElementById("teacherList");
+  list.innerHTML = "";
+
+  const teachers = await getDocs(collection(db, "users"));
+  teachers.forEach(d => {
+    const t = d.data();
+    if (t.role === "teacher") {
+      list.innerHTML += `
+        <div>
+          <strong>${t.name}</strong> (${t.department})
+          <button onclick="book('${d.id}')">Book</button>
+        </div>`;
+    }
   });
-  alert("Appointment requested");
-};
+
+  /* ---------- BOOK FUNCTION ---------- */
+  window.book = async function (teacherId) {
+    await addDoc(collection(db, "appointments"), {
+      studentId: uid,
+      teacherId,
+      status: "Pending",
+      createdAt: new Date()
+    });
+    alert("Appointment requested");
+  };
+});
