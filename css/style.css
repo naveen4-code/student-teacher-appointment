@@ -1,90 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-* { box-sizing: border-box; }
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+body {
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea, #764ba2);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 .card {
-  width: px;
+  width: 100%;
+  max-width: 420px;
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 25px;
-  color: #ffff;
+  color: #fff;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
-h2 { text-align: center; margin-bottom: 20px; }
-input, select, button {
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+input,
+select,
+button {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
   border-radius: 8px;
   border: none;
+  font-size: 14px;
+}
+input:focus,
+select:focus {
+  outline: none;
 }
 button {
   background: #00e0ff;
   font-weight: 600;
   cursor: pointer;
 }
-button:hover { opacity: 0.9; }
+button:hover {
+  opacity: 0.9;
+}
 a {
   color: #fff;
   text-decoration: underline;
   display: block;
   text-align: center;
   margin-top: 10px;
+  font-size: 14px;
 }
 .list {
   margin-top: 20px;
 }
-.list div {
-  background: rgba(255,255,255,0.2);
-  padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-}
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 40px;
-  align-items: center;
-}
-.card {
-  width: 420px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  padding: 25px;
-  color: #fff;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
+.list div,
 .list-item {
   background: rgba(255,255,255,0.2);
   padding: 12px;
-  margin-top: 10px;
+  margin-bottom: 8px;
   border-radius: 10px;
-}
-.container-row {
-  display: flex;
-  gap: 60px;          
-  padding: 50px;
-  justify-content: center;
-  align-items: flex-start;
-}
-.card.wide {
-  width: 520px;
 }
 .modern-table {
   width: 100%;
@@ -103,4 +84,17 @@ body {
 }
 .modern-table tr:hover {
   background: rgba(255,255,255,0.1);
+}
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  input,
+  select,
+  button {
+    font-size: 13px;
+  }
 }
